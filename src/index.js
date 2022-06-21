@@ -6,8 +6,9 @@ import { legacy_createStore } from "redux";
 import "./index.css";
 import reducer from "./reducers";
 import App from "./components/App";
+import middleware from "./middleware";
 
-const store = legacy_createStore(reducer);
+const store = legacy_createStore(reducer, middleware);
 
 ReactDOM.render(
     <Provider store={store}>
