@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { handleAddTweet } from "../actions/tweets";
 
 const NewTweet = ({ dispatch, id }) => {
+  const navigate = useNavigate();
   const [text, setText] = useState("");
 
   const handleChange = e => {
@@ -17,9 +19,11 @@ const NewTweet = ({ dispatch, id }) => {
 
     dispatch(handleAddTweet(text, id));
 
-    console.log("New Tweet: ", text);
-
     setText("");
+
+    if (!id) {
+      navigate("/");
+    };
   };
 
   const tweetCharLeft = 280 - text.length;
