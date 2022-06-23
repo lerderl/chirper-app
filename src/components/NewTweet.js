@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { connect } from "react-redux";
 
-const NewTweet = () => {
+import { handleAddTweet } from "../actions/tweets";
+
+const NewTweet = ({ dispatch, id }) => {
   const [text, setText] = useState("");
 
   const handleChange = e => {
@@ -12,7 +15,7 @@ const NewTweet = () => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    // TODO: Add Tweet to store
+    dispatch(handleAddTweet(text, id));
 
     console.log("New Tweet: ", text);
 
@@ -29,8 +32,8 @@ const NewTweet = () => {
         <textarea
           value={text}
           maxLength={280}
-          onChange={handleChange}
           className="textarea"
+          onChange={handleChange}
           placeholder="What do you have to say?"
         />
         {tweetCharLeft <= 100 &&
@@ -42,4 +45,4 @@ const NewTweet = () => {
   );
 };
 
-export default NewTweet;
+export default connect()(NewTweet);
